@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rally — party games for everyone in the room</title>
+<meta name="description" content="A hosted lobby, phones as controllers, one screen as the board. No accounts, no internet.">
+<meta name="theme-color" content="#101418">
+<style>
+  :root{--bg:#f6f5f2;--panel:#fff;--ink:#14181d;--muted:#5d666f;--line:#d9d6cf;--accent:#6b4a2a}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",sans-serif}
+  main{max-width:760px;margin:0 auto;padding:48px 20px 64px}
+  h1{font-size:33px;line-height:1.15;letter-spacing:-.02em;margin:0 0 10px}
+  .lede{font-size:18px;color:var(--muted);margin:0 0 26px}
+  .cta{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;font-weight:600;padding:12px 20px;border-radius:9px}
+  .status{margin:26px 0;padding:14px 16px;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:9px;background:var(--panel);font-size:14px}
+  .status b{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:4px}
+  h2{font-size:17px;margin:30px 0 8px}
+  ul{padding-left:20px}li{margin:4px 0}
+  code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;background:#eeede9;padding:1px 5px;border-radius:4px}
+  table{border-collapse:collapse;width:100%;font-size:14px;margin-top:8px}
+  th,td{text-align:left;border-bottom:1px solid var(--line);padding:7px 8px;vertical-align:top}
+  th{color:var(--muted);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em}
+  .gap{margin:22px 0 0;padding:12px 14px;border:1px solid #e3c9c9;border-left:4px solid #a02a2a;border-radius:9px;background:#fdf3f3;color:#7d1f1f;font-size:13.5px}
+  footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}
+  a{color:var(--accent)}
+</style></head>
+<body><main>
+  <h1>Rally</h1>
+  <p class="lede">Party games for everyone in the room — phones as controllers, one screen as the board. <strong>No accounts, no internet.</strong></p>
+  <a class="cta" href="play/index.html">Open Rally</a>
+
+  <p class="gap"><strong>The LAN transport is not built, and there is no QR scanner.</strong> The demo runs the host and every player in one page through the same lobby rules a hotspot link would carry, and a lobby code is typed rather than scanned.</p>
+
+  <div class="status">
+    <b>Status</b>
+    Built and working: a hosted lobby with a four-digit code; four players joining a round; three bundled games; rounds that open and close; a leaderboard whose total equals the sum of the per-round points; and a latecomer who joins as a <em>spectator</em> and is a player from the next round.
+    <br><b>Release</b>: Windows EXE, Android APK and Linux binary, built from this source in CI — <a href="https://github.com/drsamonline/app-rally/releases/tag/app-latest">app-latest</a>.
+    <br><b>Not built</b>: the LAN transport, QR joining, and the games themselves beyond turn-based questions — the lobby, the rounds and the scoring are the parts that are real.
+  </div>
+
+  <h2>What it does</h2>
+  <ul>
+    <li>Hosts a lobby with a code, and takes four players into a round.</li>
+    <li>Runs rounds of three bundled games, and closes them to add up the points.</li>
+    <li>Shows a leaderboard whose total is the sum of the per-round points, and says so.</li>
+    <li>Puts a latecomer in as a spectator, and into the next round's players.</li>
+  </ul>
+
+  <h2>What it will not do</h2>
+  <ul>
+    <li><strong>Require an account.</strong> A player is a name.</li>
+    <li><strong>Break a round for a latecomer.</strong> They watch, then play.</li>
+    <li><strong>Let a spectator score</strong> in the round they missed.</li>
+    <li><strong>Reward speed too much</strong> — a fast correct answer is 13, a slow one 10, so the slow half of the room still plays.</li>
+    <li><strong>Use the internet.</strong> No <code>fetch</code>, no endpoint; CSP <code>connect-src 'none'</code>.</li>
+  </ul>
+
+  <h2>When things go wrong</h2>
+  <table>
+    <tr><th>Case</th><th>What happens</th></tr>
+    <tr><td>Bad input</td><td>No host name, no player name, a duplicate name, an answer with no round open, closing a round that is not open — each refused with the field named.</td></tr>
+    <tr><td>No network</td><td>Nothing changes; there is no network code.</td></tr>
+    <tr><td>Storage full or unavailable</td><td><strong>NOT SAVED</strong>, and the lobby on screen is unchanged.</td></tr>
+    <tr><td>Corrupt saved state</td><td>Reported and offered for export; never replaced with an empty lobby.</td></tr>
+  </table>
+
+  <h2>How to run it</h2>
+  <ul>
+    <li><strong>Here</strong>: <a href="play/index.html">play/index.html</a>, or install it from your browser's menu.</li>
+    <li><strong>Offline file</strong>: open <code>docs/play/index.html</code> straight from disk.</li>
+    <li><strong>Tests</strong>: <code>node tests/self-tests.js</code>.</li>
+  </ul>
+
+  <footer>PolyForm Noncommercial 1.0.0 · (c) 2026 Dr Sohil Momin · <a href="https://github.com/drsamonline/app-rally">source</a></footer>
+</main></body></html>

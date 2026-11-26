@@ -1,0 +1,30 @@
+NOTICE
+======
+
+Rally — https://github.com/drsamonline/app-rally
+Copyright 2026 Dr Sohil Momin. Licensed under PolyForm Noncommercial 1.0.0 (see LICENSE).
+
+Third-party components
+----------------------
+
+None. Rally has no third-party dependency and no CDN.
+
+Vendored from this project's own kits (same licence, same author), copied verbatim on 26/11/2026:
+
+- web-kit 0.1.0 — docs/play/web-kit.js — the offline shell, storage helpers and PWA registration
+- export-kit 1.0.0 — docs/play/export-kit.js — Blob download, used for the lobby export
+
+Neither kit is modified. Neither makes a network request.
+
+The transport gap
+-----------------
+
+The LAN transport is NOT built and there is NO QR scanner. The engine takes a bus with send/on and ships
+with a same-device bus; the demo runs the host and every player in one page through the same lobby rules a
+hotspot link would carry. A peer link over the room's network would be a runtime network call, which this
+fleet does not make, and faking one would misrepresent the app.
+
+No accounts
+-----------
+
+A player is a name and nothing else. There is no password, login, token or account id in this app.
