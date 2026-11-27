@@ -19,7 +19,7 @@ Neither kit is modified. Neither makes a network request.
 The transport gap
 -----------------
 
-The LAN transport is NOT built and there is NO QR scanner. The engine takes a bus with send/on and ships
+A LAN transport does exist in this estate — `lan-kit`, zero dependencies, SSE and POST — but it is not wired into this app. What ships here is a same-device bus, so the room logic runs and can be tested. The engine takes a bus with send/on and ships
 with a same-device bus; the demo runs the host and every player in one page through the same lobby rules a
 hotspot link would carry. A peer link over the room's network would be a runtime network call, which this
 fleet does not make, and faking one would misrepresent the app.
